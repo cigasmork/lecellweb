@@ -12,6 +12,13 @@ function Programs() {
   const [active, setActive] = React.useState(0);
   const p = pd.data[active];
 
+  React.useEffect(() => {
+    Object.values(progImgs).forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   return (
     <section className="programs section-pad" id="programs">
       <div className="wrap">
@@ -34,8 +41,17 @@ function Programs() {
           ))}
         </div>
         <div className="prog-body">
-          <div className="prog-visual" style={{ overflow: "hidden" }}>
-            <img src={progImgs[p.id]} alt={p.tab} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
+          <div className="prog-visual prog-visual-stack">
+            {pd.data.map((d, i) => (
+              <img
+                key={d.id}
+                src={progImgs[d.id]}
+                alt={d.tab}
+                className={i === active ? "is-active" : ""}
+                loading="eager"
+                decoding="async"
+              />
+            ))}
           </div>
           <div className="prog-text">
             <div className="gold-divider">

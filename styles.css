@@ -534,6 +534,23 @@ section { position: relative; }
 @media (max-width: 960px) { .prog-body { grid-template-columns: 1fr; gap: 32px; padding: 48px 0 12px; } }
 
 .prog-visual { aspect-ratio: 4/5; }
+.prog-visual-stack {
+  position: relative;
+  overflow: hidden;
+}
+.prog-visual-stack img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.prog-visual-stack img.is-active {
+  opacity: 1;
+}
 .prog-text h3 { font-family: var(--ff-display); font-size: clamp(28px, 3vw, 44px); font-weight: 300; line-height: 1.1; letter-spacing: -0.01em; margin: 0 0 12px; }
 .prog-text h3 em { font-style: italic; color: var(--gold-deep); }
 .prog-text .korean { font-family: var(--ff-serif); font-size: 22px; font-weight: 300; color: var(--ink-soft); margin-bottom: 32px; letter-spacing: -0.01em; }
