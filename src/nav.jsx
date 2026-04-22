@@ -1,9 +1,9 @@
-function Nav() {
+function Nav({ lang, setLang }) {
   const [scrolled, setScrolled] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [langOpen, setLangOpen] = React.useState(false);
-  const [activeLang, setActiveLang] = React.useState("KR");
   const langRef = React.useRef(null);
+  const t = useLang();
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -41,12 +41,12 @@ function Nav() {
   ];
 
   const menuItems = [
-    { id: "about",     label: "About" },
-    { id: "signature", label: "Signature" },
-    { id: "programs",  label: "Programs" },
-    { id: "doctors",   label: "Medical Team" },
-    { id: "space",     label: "Our Space" },
-    { id: "location",  label: "Contact Us" },
+    { id: "about",     label: t.nav.about },
+    { id: "signature", label: t.nav.signature },
+    { id: "programs",  label: t.nav.programs },
+    { id: "doctors",   label: t.nav.doctors },
+    { id: "space",     label: t.nav.space },
+    { id: "location",  label: t.nav.location },
   ];
 
   const GlobeIcon = () => (
@@ -60,18 +60,15 @@ function Nav() {
     <>
       <nav className={`nav ${scrolled ? "scrolled" : ""}`}>
         <div className="nav-inner nav-inner--simple">
-          {/* Hamburger left */}
           <button className="nav-burger" onClick={() => setMenuOpen(true)} aria-label="Open menu">
             <span /><span /><span />
           </button>
 
-          {/* Brand center */}
           <a href="#top" onClick={go("top")} className="brand brand--center">
             <span className="brand-mark">Le<em>Cell</em></span>
             <span className="brand-sub">Cheongdam · 청담</span>
           </a>
 
-          {/* Globe right */}
           <div className="nav-globe-area" ref={langRef}>
             <button className="nav-globe-btn" onClick={() => setLangOpen(v => !v)} aria-label="Language">
               <GlobeIcon />
@@ -81,8 +78,8 @@ function Nav() {
                 {langs.map(l => (
                   <button
                     key={l.code}
-                    className={`nav-lang-item ${activeLang === l.code ? "active" : ""}`}
-                    onClick={() => { setActiveLang(l.code); setLangOpen(false); }}
+                    className={`nav-lang-item ${lang === l.code ? "active" : ""}`}
+                    onClick={() => { setLang(l.code); setLangOpen(false); }}
                   >
                     <span className="nav-lang-code">{l.code}</span>
                     <span className="nav-lang-native">{l.native}</span>
@@ -94,7 +91,6 @@ function Nav() {
         </div>
       </nav>
 
-      {/* Slide-in menu */}
       <div
         className="slide-menu-overlay"
         style={{ opacity: menuOpen ? 1 : 0, pointerEvents: menuOpen ? "auto" : "none", transition: "opacity 0.35s ease" }}
@@ -104,7 +100,6 @@ function Nav() {
         className="slide-menu"
         style={{ transform: menuOpen ? "translateX(0)" : "translateX(100%)", transition: "transform 0.4s cubic-bezier(0.22,1,0.36,1)" }}
       >
-        {/* Close */}
         <button className="slide-menu-close" onClick={() => setMenuOpen(false)} aria-label="Close">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4">
             <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -118,17 +113,16 @@ function Nav() {
             </a>
           ))}
           <a href="#reserve" className="slide-menu-reserve" onClick={() => setMenuOpen(false)}>
-            Reserve
+            {t.nav.reserve}
           </a>
         </div>
 
-        {/* Lang at bottom */}
         <div className="slide-menu-langs">
           {langs.map(l => (
             <button
               key={l.code}
-              className={`slide-menu-lang ${activeLang === l.code ? "active" : ""}`}
-              onClick={() => setActiveLang(l.code)}
+              className={`slide-menu-lang ${lang === l.code ? "active" : ""}`}
+              onClick={() => { setLang(l.code); setMenuOpen(false); }}
             >
               {l.native}
             </button>

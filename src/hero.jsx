@@ -1,9 +1,9 @@
 function Hero() {
+  const t = useLang();
+  const h = t.hero;
   return (
     <section className="hero" id="top">
       <div className="hero-bg" />
-
-      {/* Vimeo background embed */}
       <div className="hero-video-wrap">
         <iframe
           className="hero-yt-iframe"
@@ -14,39 +14,36 @@ function Hero() {
           title="HERO"
         />
       </div>
-
       <div className="hero-overlay" />
       <div className="hero-inner">
         <div className="hero-top">
-          <div>
-            <div className="eyebrow">Anti-Aging · Stem Cell · Cheongdam</div>
-          </div>
-          <div className="eyebrow">est. 2026 · seoul</div>
+          <div><div className="eyebrow">{h.eyebrow}</div></div>
+          <div className="eyebrow">{h.est}</div>
         </div>
-
         <div>
           <h1 className="hero-headline">
-            The art of<br />
-            <em>cellular renewal.</em>
-            <span className="ko">시간의 흐름을 거스르기보다,<br />아름답게 다듬어가는<br />르셀 청담의 프리미엄 안티에이징 케어</span>
+            {h.headline1}<br />
+            <em>{h.headline2}</em>
+            <span className="ko">{h.sub.split("\n").map((line, i, arr) => (
+              <React.Fragment key={i}>{line}{i < arr.length - 1 && <br />}</React.Fragment>
+            ))}</span>
           </h1>
         </div>
-
         <div className="hero-foot">
           <div className="kv">
-            <span className="k">Address</span>
-            <span className="v">서울 강남구 청담동 <em>89–21</em></span>
+            <span className="k">{h.addrLabel}</span>
+            <span className="v"><em>{h.addr}</em></span>
           </div>
           <div className="kv">
-            <span className="k">Hours</span>
-            <span className="v">Mon–Fri <em>10:00 — 19:00</em></span>
+            <span className="k">{h.hoursLabel}</span>
+            <span className="v"><em>{h.hours}</em></span>
           </div>
           <div className="kv">
-            <span className="k">Care</span>
+            <span className="k">{h.careLabel}</span>
             <span className="v">By <em>appointment</em> only</span>
           </div>
           <div className="scroll-hint">
-            <span>Scroll</span>
+            <span>{h.scroll}</span>
             <span className="line" />
           </div>
         </div>
