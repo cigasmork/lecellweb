@@ -134,40 +134,6 @@ function Doctors() {
     return () => clearInterval(t);
   }, [idx]);
 
-  // Drag / swipe gesture
-  const dragState = React.useRef({ active: false, startX: 0, dx: 0 });
-  const [dragOffset, setDragOffset] = React.useState(0);
-
-  const onPointerDown = (e) => {
-    dragState.current = { active: true, startX: e.clientX, dx: 0 };
-    e.currentTarget.setPointerCapture?.(e.pointerId);
-  };
-  const onPointerMove = (e) => {
-    if (!dragState.current.active) return;
-    const dx = e.clientX - dragState.current.startX;
-    dragState.current.dx = dx;
-    setDragOffset(dx);
-  };
-  const onPointerUp = () => {
-    if (!dragState.current.active) return;
-    const dx = dragState.current.dx;
-    dragState.current.active = false;
-    setDragOffset(0);
-    if (Math.abs(dx) > 80) {
-      if (dx < 0) next(); else prev();
-    }
-  };
-
-  const wheelLock = React.useRef(0);
-  const onWheel = (e) => {
-    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0;
-    if (Math.abs(delta) < 20) return;
-    const now = Date.now();
-    if (now - wheelLock.current < 600) return;
-    wheelLock.current = now;
-    if (delta > 0) next(); else prev();
-  };
-
   React.useEffect(() => {
     const onKey = (e) => {
       if (e.key === "ArrowLeft") prev();
@@ -212,19 +178,11 @@ function Doctors() {
         </div>
 
         {/* Slider */}
-        <div
-          style={{ position: "relative", touchAction: "pan-y", cursor: dragState.current.active ? "grabbing" : "grab", userSelect: "none" }}
-          onPointerDown={onPointerDown}
-          onPointerMove={onPointerMove}
-          onPointerUp={onPointerUp}
-          onPointerCancel={onPointerUp}
-          onWheel={onWheel}
-        >
+        <div style={{ position: "relative", userSelect: "none" }}>
           <div style={{
             display: "grid", gridTemplateColumns: "1fr",
             gap: 28, alignItems: "stretch",
-            transform: `translateX(${dragOffset * 0.3}px)`,
-            transition: dragState.current.active ? "none" : "transform 0.4s ease",
+            transition: "transform 0.4s ease",
             maxWidth: 980,
             margin: "0 auto",
           }} className="doctor-slide-grid">
@@ -248,6 +206,60 @@ function Doctors() {
                   }}
                 />
               ))}
+              <button
+                type="button"
+                className="doctor-nav-btn"
+                aria-label="Previous doctor"
+                onClick={prev}
+                style={{
+                  position: "absolute",
+                  left: 12,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  width: 42,
+                  height: 42,
+                  borderRadius: "50%",
+                  border: "1px solid rgba(255,255,255,0.8)",
+                  background: "rgba(27,25,21,0.45)",
+                  color: "#fff",
+                  display: "grid",
+                  placeItems: "center",
+                  cursor: "pointer",
+                  backdropFilter: "blur(6px)",
+                  zIndex: 3,
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="15 18 9 12 15 6" />
+                </svg>
+              </button>
+              <button
+                type="button"
+                className="doctor-nav-btn"
+                aria-label="Next doctor"
+                onClick={next}
+                style={{
+                  position: "absolute",
+                  right: 12,
+                  top: "50%",
+                  transform: "translateY(-50%)",
+                  width: 42,
+                  height: 42,
+                  borderRadius: "50%",
+                  border: "1px solid rgba(255,255,255,0.8)",
+                  background: "rgba(27,25,21,0.45)",
+                  color: "#fff",
+                  display: "grid",
+                  placeItems: "center",
+                  cursor: "pointer",
+                  backdropFilter: "blur(6px)",
+                  zIndex: 3,
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="9 18 15 12 9 6" />
+                </svg>
+              </button>
               <div style={{
                 position: "absolute", top: 24, left: 24,
                 fontFamily: "var(--ff-mono)", fontSize: 10,
@@ -411,7 +423,7 @@ function Doctors() {
                     <polyline points="6 3 2 7 6 11"/>
                     <polyline points="18 3 22 7 18 11"/>
                   </svg>
-                  <span>Drag · Swipe · ← →</span>
+                  <span>Use Buttons · ← →</span>
                 </span>
                 <div style={{ flex: 1, display: "flex", gap: 8, justifyContent: "flex-end" }}>
                   {doctorsData.map((_, i) => (
