@@ -2,6 +2,7 @@ function Nav({ lang, setLang }) {
   const [scrolled, setScrolled] = React.useState(false);
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [langOpen, setLangOpen] = React.useState(false);
+  const [logoError, setLogoError] = React.useState(false);
   const langRef = React.useRef(null);
   const t = useLang();
 
@@ -65,8 +66,19 @@ function Nav({ lang, setLang }) {
           </button>
 
           <a href="#top" onClick={go("top")} className="brand brand--center">
-            <span className="brand-mark">Le<em>Cell</em></span>
-            <span className="brand-sub">Cheongdam · 청담</span>
+            {!logoError ? (
+              <img
+                className="brand-logo"
+                src="assets/logo.png"
+                alt="LeCell Cheongdam"
+                onError={() => setLogoError(true)}
+              />
+            ) : (
+              <>
+                <span className="brand-mark">Le<em>Cell</em></span>
+                <span className="brand-sub">Cheongdam · 청담</span>
+              </>
+            )}
           </a>
 
           <div className="nav-globe-area" ref={langRef}>
