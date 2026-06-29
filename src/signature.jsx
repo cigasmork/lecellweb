@@ -19,8 +19,8 @@ function SigSlider() {
       ))}
       <div className="badge">Signature · 01</div>
       <div className="caption">
-        <span>Cellular Renewal Program</span>
-        <span>duration · 12 weeks</span>
+        <span>Timeless 360 Signature</span>
+        <span>staged course</span>
       </div>
       <div style={{ position: "absolute", bottom: 32, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 8, zIndex: 2 }}>
         {sigImages.map((_, i) => (

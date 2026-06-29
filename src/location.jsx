@@ -17,7 +17,7 @@ function Location() {
               <li><span className="k">{l.hoursLabel}</span><span>{l.hours}<br /><span style={{ color: "rgba(240,233,217,0.6)", fontSize: 14 }}>{l.hoursSub}</span></span></li>
               <li><span className="k">{l.reserveLabel}</span><span>{l.reserveVal}</span></li>
               <li><span className="k">{l.valetLabel}</span><span>{l.valetVal}</span></li>
-              <li><span className="k">{l.contactLabel}</span><span>02 · 000 · 0000</span></li>
+              <li><span className="k">{l.contactLabel}</span><span>카카오톡 @르셀청담 · lecell.kr</span></li>
             </ul>
             <a href="#reserve" style={{ display: "inline-block", marginTop: 40, padding: "18px 32px", border: "1px solid var(--gold)", color: "var(--gold)", fontFamily: "var(--ff-mono)", fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase" }}>{l.cta}</a>
           </div>
@@ -59,7 +59,7 @@ function Footer() {
           </div>
           <div className="foot-col">
             <h4>{f.contactTitle}</h4>
-            <ul><li>02 · 000 · 0000</li><li>hello@lecell.kr</li><li>Instagram</li><li>KakaoTalk</li></ul>
+            <ul><li>카카오톡 @르셀청담</li><li>lecell.kr</li><li>Instagram @lecellclinic</li></ul>
           </div>
         </div>
         <div className="foot-rule" />
