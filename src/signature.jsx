@@ -33,9 +33,85 @@ function SigSlider() {
   );
 }
 
+function SigModal({ s, item, onClose }) {
+  const d = item.detail;
+  const m = s.modal;
+
+  React.useEffect(() => {
+    const onKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [onClose]);
+
+  if (!d) return null;
+
+  return ReactDOM.createPortal(
+    <div className="sig-modal-backdrop" onClick={onClose}>
+      <div className="sig-modal" role="dialog" aria-modal="true" aria-label={item.ti} onClick={(e) => e.stopPropagation()}>
+        <button className="sig-modal-close" onClick={onClose} aria-label={m.close}>×</button>
+        <div className="sig-modal-scroll">
+          <div className="sig-modal-cat">{d.cat}</div>
+          <div className="sig-modal-head">
+            <span className="num">{item.n}</span>
+            <div>
+              <h3>{item.ti}</h3>
+              <div className="ko">{item.ko}</div>
+            </div>
+          </div>
+          {d.tagline && <p className="sig-modal-tagline">{d.tagline}</p>}
+          <p className="sig-modal-desc">{d.desc}</p>
+
+          {d.steps && d.steps.length > 0 && (
+            <div className="sig-modal-block">
+              <div className="sig-modal-label">{m.stepsLabel}</div>
+              <ul className="sig-modal-steps">
+                {d.steps.map((st, i) => <li key={i}>{st}</li>)}
+              </ul>
+            </div>
+          )}
+
+          {d.programs && d.programs.length > 0 && (
+            <div className="sig-modal-block">
+              <div className="sig-modal-label">{m.programsLabel}</div>
+              <div className="sig-modal-progs">
+                {d.programs.map((p, i) => (
+                  <div className="prog-row" key={i}>
+                    <span className="pn">{p.name}</span>
+                    <span className="pt">{p.tier}</span>
+                    <span className="pnote">{p.note}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="sig-modal-meta">
+            {d.meta.map((mt, i) => (
+              <div className="attr" key={i}>
+                <div className="k">{mt.k}</div>
+                <div className="v">{mt.v}</div>
+              </div>
+            ))}
+          </div>
+
+          {m.disclaimer && <p className="sig-modal-note">{m.disclaimer}</p>}
+        </div>
+      </div>
+    </div>,
+    document.body
+  );
+}
+
 function Signature() {
   const t = useLang();
   const s = t.signature;
+  const [openIdx, setOpenIdx] = React.useState(null);
+  const openItem = openIdx != null ? s.treatments[openIdx] : null;
   return (
     <section className="signature" id="signature">
       <div className="wrap">
@@ -64,8 +140,18 @@ function Signature() {
           </div>
         </div>
         <div className="sig-list">
-          {s.treatments.map((t) => (
-            <div className="cell" key={t.n}>
+          {s.treatments.map((t, i) => (
+            <div
+              className="cell"
+              key={t.n}
+              role="button"
+              tabIndex={0}
+              aria-haspopup="dialog"
+              onClick={() => setOpenIdx(i)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setOpenIdx(i); }
+              }}
+            >
               <div>
                 <div className="num">{t.n}</div>
                 <div className="ti">{t.ti}</div>
@@ -76,6 +162,7 @@ function Signature() {
           ))}
         </div>
       </div>
+      {openItem && <SigModal s={s} item={openItem} onClose={() => setOpenIdx(null)} />}
     </section>
   );
 }

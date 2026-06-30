@@ -514,7 +514,77 @@ section,
 .sig-list .cell .num { font-family: var(--ff-display); font-size: 42px; font-style: italic; font-weight: 300; color: var(--gold); line-height: 1; }
 .sig-list .cell .ti { font-family: var(--ff-serif); font-size: 18px; color: #F0E9D9; font-weight: 400; letter-spacing: -0.01em; margin-top: 20px; }
 .sig-list .cell .sub { font-family: var(--ff-sans); font-size: 12px; color: rgba(240,233,217,0.55); margin-top: 6px; line-height: 1.5; letter-spacing: 0.02em; }
-.sig-list .cell .arrow { font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(240,233,217,0.5); align-self: flex-start; }
+.sig-list .cell .arrow { font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(240,233,217,0.5); align-self: flex-start; transition: color 0.3s ease; }
+.sig-list .cell:hover .arrow,
+.sig-list .cell:focus-visible .arrow { color: var(--gold); }
+.sig-list .cell:focus-visible { outline: 1px solid var(--gold); outline-offset: -1px; }
+
+/* SIGNATURE MODAL ------------------------------------------------- */
+.sig-modal-backdrop {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(10, 9, 7, 0.72);
+  backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 32px 20px;
+  animation: sigFade 0.3s ease;
+}
+@keyframes sigFade { from { opacity: 0; } to { opacity: 1; } }
+.sig-modal {
+  position: relative;
+  width: 100%; max-width: 720px; max-height: 88vh;
+  background: var(--ink);
+  border: 1px solid rgba(240,233,217,0.18);
+  border-radius: var(--radius);
+  box-shadow: 0 40px 120px rgba(0,0,0,0.55);
+  display: flex; flex-direction: column;
+  animation: sigRise 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes sigRise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.sig-modal-close {
+  position: absolute; top: 16px; right: 18px; z-index: 2;
+  width: 38px; height: 38px;
+  background: transparent; border: 1px solid rgba(240,233,217,0.22);
+  border-radius: 50%; color: #F0E9D9;
+  font-size: 22px; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+}
+.sig-modal-close:hover { border-color: var(--gold); color: var(--gold); background: rgba(240,233,217,0.05); }
+.sig-modal-scroll { overflow-y: auto; padding: 56px 48px 44px; }
+.sig-modal-cat { font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--gold); }
+.sig-modal-head { display: flex; align-items: flex-start; gap: 20px; margin-top: 20px; }
+.sig-modal-head .num { font-family: var(--ff-display); font-size: 56px; font-style: italic; font-weight: 300; color: var(--gold); line-height: 0.9; }
+.sig-modal-head h3 { font-family: var(--ff-serif); font-size: 28px; font-weight: 400; color: #F0E9D9; margin: 0; letter-spacing: -0.01em; }
+.sig-modal-head .ko { font-family: var(--ff-sans); font-size: 13px; color: rgba(240,233,217,0.55); margin-top: 6px; letter-spacing: 0.02em; }
+.sig-modal-tagline { font-family: var(--ff-serif); font-size: 16px; font-style: italic; color: var(--gold-pale); margin: 26px 0 0; line-height: 1.6; }
+.sig-modal-desc { font-family: var(--ff-sans); font-size: 14px; font-weight: 300; line-height: 1.85; color: rgba(240,233,217,0.78); margin: 18px 0 0; }
+.sig-modal-block { margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(240,233,217,0.14); }
+.sig-modal-label { font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(240,233,217,0.5); margin-bottom: 16px; }
+.sig-modal-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.sig-modal-steps li { position: relative; padding-left: 22px; font-family: var(--ff-sans); font-size: 13.5px; font-weight: 300; line-height: 1.6; color: rgba(240,233,217,0.82); }
+.sig-modal-steps li::before { content: "▸"; position: absolute; left: 0; top: 0; color: var(--gold); font-size: 12px; }
+.sig-modal-progs { display: flex; flex-direction: column; }
+.sig-modal-progs .prog-row {
+  display: grid; grid-template-columns: 1.4fr 0.9fr 1.4fr; gap: 14px; align-items: baseline;
+  padding: 13px 0; border-bottom: 1px solid rgba(240,233,217,0.08);
+}
+.sig-modal-progs .prog-row:last-child { border-bottom: 0; }
+.sig-modal-progs .pn { font-family: var(--ff-serif); font-size: 14px; color: #F0E9D9; }
+.sig-modal-progs .pt { font-family: var(--ff-mono); font-size: 11px; letter-spacing: 0.06em; color: var(--gold); }
+.sig-modal-progs .pnote { font-family: var(--ff-sans); font-size: 12.5px; font-weight: 300; color: rgba(240,233,217,0.6); line-height: 1.5; }
+.sig-modal-meta { margin-top: 32px; padding-top: 28px; border-top: 1px solid rgba(240,233,217,0.14); display: grid; grid-template-columns: 1fr 1fr; gap: 22px 32px; }
+.sig-modal-meta .attr .k { font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 7px; }
+.sig-modal-meta .attr .v { font-family: var(--ff-sans); font-size: 13.5px; font-weight: 300; color: rgba(240,233,217,0.82); line-height: 1.55; }
+.sig-modal-note { font-family: var(--ff-sans); font-size: 11px; font-weight: 300; line-height: 1.7; color: rgba(240,233,217,0.42); margin: 30px 0 0; }
+@media (max-width: 640px) {
+  .sig-modal-backdrop { padding: 0; align-items: flex-end; }
+  .sig-modal { max-width: 100%; max-height: 92vh; border-radius: var(--radius) var(--radius) 0 0; }
+  .sig-modal-scroll { padding: 52px 24px 36px; }
+  .sig-modal-head .num { font-size: 44px; }
+  .sig-modal-head h3 { font-size: 23px; }
+  .sig-modal-meta { grid-template-columns: 1fr; gap: 18px; }
+  .sig-modal-progs .prog-row { grid-template-columns: 1fr; gap: 4px; }
+}
 
 /* PROGRAMS -------------------------------------------------------- */
 .programs { background: var(--paper); }
