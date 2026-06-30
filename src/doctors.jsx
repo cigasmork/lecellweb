@@ -31,6 +31,15 @@ const doctorsData = [
       { tag: "研究", line: "献体ベース顔面解剖ワークショップ" },
       { tag: "R&D", line: "幹細胞・エクソソーム再生医療の臨床研究・適用" },
     ],
+    cvCN: [
+      { tag: "经验", line: "面部提升·重建手术 30年临床经验" },
+      { tag: "经验", line: "累计执刀 8,000例以上手术" },
+      { tag: "进修", line: "哈佛医学院进修 (Harvard Medical School)" },
+      { tag: "进修", line: "梅奥诊所高级外科进修 (Mayo Clinic)" },
+      { tag: "学会", line: "美国整形外科学会 (ASPS) 正式会员" },
+      { tag: "研究", line: "尸体解剖基础面部解剖学工作坊" },
+      { tag: "R&D", line: "干细胞·外泌体再生医学临床研究与应用" },
+    ],
   },
   {
     role: "Director · 원장",
@@ -60,6 +69,14 @@ const doctorsData = [
       { tag: "前職", line: "セルピアクリニック · セルイズラボクリニック院長" },
       { tag: "著書", line: "『Skin Deep, Gen Deep: Forever Young』 共著" },
       { tag: "現職", line: "ルセル清潭 院長" },
+    ],
+    cvCN: [
+      { tag: "学历", line: "高丽大学医学专门研究生院毕业 · 高丽大学安岩医院住院医师结业" },
+      { tag: "学历", line: "庆熙大学韩医学系毕业" },
+      { tag: "资格", line: "医师·韩医师双重执照 · 中西医协诊专门医" },
+      { tag: "前职", line: "曾任 Celpia 医院 · Cell Is Lab 医院 院长" },
+      { tag: "著作", line: "合著《Skin Deep, Gen Deep: Forever Young》" },
+      { tag: "现职", line: "LeCell 清潭 院长" },
     ],
   },
   {
@@ -91,6 +108,14 @@ const doctorsData = [
       { tag: "専門", line: "皮膚 · 抗老化 · 精密診断 · ウェルネス診療" },
       { tag: "現職", line: "ルセル清潭 院長" },
     ],
+    cvCN: [
+      { tag: "学历", line: "顺天乡大学医科大学毕业" },
+      { tag: "资格", line: "专科医师" },
+      { tag: "前职", line: "曾任职于 Wooridul 医院" },
+      { tag: "著作", line: "合著《Skin Deep, Gen Deep: Forever Young》" },
+      { tag: "专长", line: "皮肤 · 抗衰老 · 精密诊断 · 健康管理诊疗" },
+      { tag: "现职", line: "LeCell 清潭 院长" },
+    ],
   },
   {
     role: "Advisor · 고문 (의학박사)",
@@ -121,6 +146,14 @@ const doctorsData = [
       { tag: "R&D", line: "デジタルヘルスケア · 精密医療ベースのカスタム健康管理研究" },
       { tag: "著書", line: "『Skin Deep, Gen Deep: Forever Young』 共著" },
     ],
+    cvCN: [
+      { tag: "学历", line: "庆熙大学研究生院医学系博士 (医学博士)" },
+      { tag: "教授", line: "庆熙大学医科大学 教授" },
+      { tag: "职务", line: "庆熙大学医院 健康促进中心 主任" },
+      { tag: "前职", line: "曾任 庆熙医疗院 医科学研究院副院长 · 外科科长" },
+      { tag: "R&D", line: "数字医疗 · 精准医疗基础的定制健康管理研究" },
+      { tag: "著作", line: "合著《Skin Deep, Gen Deep: Forever Young》" },
+    ],
   },
 ];
 
@@ -128,12 +161,14 @@ const promoTextByLang = {
   KR: "한국 최고의 거상명의와 함께하는 항노화 전문 의료진",
   EN: "Anti-aging specialists redefining the standard in Cheongdam",
   JP: "清潭の新しい基準を提示する抗老化専門医師団",
+  CN: "重新定义清潭标准的抗衰老专业医疗团队",
 };
 
 const specialtyLabelByLang = {
   KR: "전문 분야",
   EN: "Specialties",
   JP: "専門分野",
+  CN: "专业领域",
 };
 
 function Doctors() {
@@ -144,11 +179,11 @@ function Doctors() {
   const total = doctorsData.length;
 
   const doc = doctorsData[idx];
-  const getCv = (doc) => lang === "EN" ? doc.cvEN : lang === "JP" ? doc.cvJP : doc.cv;
-  const getTitle = (doc) => lang === "EN" ? doc.titleEn : lang === "JP" ? doc.titleJp : doc.title;
-  const getBlurb = (doc) => lang === "EN" ? doc.blurbEn : lang === "JP" ? doc.blurbJp : doc.blurb;
-  const getHighlights = (doc) => lang === "EN" ? doc.highlightsEn : lang === "JP" ? doc.highlightsJp : doc.highlights;
-  const getSpecialties = (doc) => lang === "EN" ? doc.specialtiesEn : lang === "JP" ? doc.specialtiesJp : doc.specialties;
+  const getCv = (doc) => lang === "EN" ? doc.cvEN : lang === "JP" ? doc.cvJP : lang === "CN" ? doc.cvCN : doc.cv;
+  const getTitle = (doc) => lang === "EN" ? doc.titleEn : lang === "JP" ? doc.titleJp : lang === "CN" ? doc.titleCn : doc.title;
+  const getBlurb = (doc) => lang === "EN" ? doc.blurbEn : lang === "JP" ? doc.blurbJp : lang === "CN" ? doc.blurbCn : doc.blurb;
+  const getHighlights = (doc) => lang === "EN" ? doc.highlightsEn : lang === "JP" ? doc.highlightsJp : lang === "CN" ? doc.highlightsCn : doc.highlights;
+  const getSpecialties = (doc) => lang === "EN" ? doc.specialtiesEn : lang === "JP" ? doc.specialtiesJp : lang === "CN" ? doc.specialtiesCn : doc.specialties;
 
   const prev = () => setIdx(i => (i - 1 + total) % total);
   const next = () => setIdx(i => (i + 1) % total);

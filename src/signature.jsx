@@ -167,4 +167,5 @@ function Signature() {
   );
 }
 
+window.SigModal = SigModal;
 window.Signature = Signature;

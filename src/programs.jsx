@@ -9,8 +9,18 @@ const progImgs = {
 function Programs() {
   const t = useLang();
   const pd = t.programs;
+  const lang = React.useContext(LangContext);
   const [active, setActive] = React.useState(0);
+  const [openItem, setOpenItem] = React.useState(null);
   const p = pd.data[active];
+
+  const detailsFor = (catId) => (window.PROGRAM_DETAILS?.[lang] || window.PROGRAM_DETAILS?.KR || {})[catId] || [];
+
+  const openModal = (catId, it, i) => {
+    const detail = detailsFor(catId)[i];
+    if (!detail) return;
+    setOpenItem({ n: String(i + 1).padStart(2, "0"), ti: it.ti, ko: it.sub, detail });
+  };
 
   React.useEffect(() => {
     Object.values(progImgs).forEach((src) => {
@@ -63,17 +73,32 @@ function Programs() {
             <div className="korean">{p.ko}</div>
             <p className="lede">{p.lede}</p>
             <div className="prog-treatments">
-              {p.items.map((it, i) => (
-                <div className="row" key={i}>
-                  <span className="n">— {String(i + 1).padStart(2, "0")}</span>
-                  <span className="ti">{it.ti}<small>{it.sub}</small></span>
-                  <span className="dur">{it.dur}</span>
-                </div>
-              ))}
+              {p.items.map((it, i) => {
+                const hasDetail = !!detailsFor(p.id)[i];
+                return (
+                  <div
+                    className={"row" + (hasDetail ? " is-clickable" : "")}
+                    key={i}
+                    role={hasDetail ? "button" : undefined}
+                    tabIndex={hasDetail ? 0 : undefined}
+                    aria-haspopup={hasDetail ? "dialog" : undefined}
+                    onClick={hasDetail ? () => openModal(p.id, it, i) : undefined}
+                    onKeyDown={hasDetail ? (e) => {
+                      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openModal(p.id, it, i); }
+                    } : undefined}
+                  >
+                    <span className="n">— {String(i + 1).padStart(2, "0")}</span>
+                    <span className="ti">{it.ti}<small>{it.sub}</small></span>
+                    <span className="dur">{it.dur}</span>
+                    {hasDetail && <span className="row-view">{pd.view || t.signature.view}</span>}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
+      {openItem && <SigModal s={{ modal: t.signature.modal }} item={openItem} onClose={() => setOpenItem(null)} />}
     </section>
   );
 }

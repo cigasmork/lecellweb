@@ -651,6 +651,25 @@ section,
 .prog-treatments .row .ti { font-family: var(--ff-serif); font-size: 17px; font-weight: 400; color: var(--ink); }
 .prog-treatments .row .ti small { display: block; font-family: var(--ff-sans); font-size: 13px; font-weight: 300; color: var(--ink-muted); margin-top: 4px; letter-spacing: 0.01em; }
 .prog-treatments .row .dur { font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.2em; color: var(--ink-muted); text-transform: uppercase; }
+.prog-treatments .row.is-clickable {
+  grid-template-columns: 60px 1fr auto auto;
+  cursor: pointer;
+  margin: 0 -16px; padding: 20px 16px;
+  transition: background 0.25s ease;
+}
+.prog-treatments .row.is-clickable:hover { background: var(--ivory-deep); }
+.prog-treatments .row.is-clickable:focus-visible { outline: 1px solid var(--gold-deep); outline-offset: -1px; }
+.prog-treatments .row .row-view {
+  font-family: var(--ff-mono); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--gold-deep); white-space: nowrap; align-self: center; opacity: 0.6;
+  transition: opacity 0.25s ease;
+}
+.prog-treatments .row.is-clickable:hover .row-view,
+.prog-treatments .row.is-clickable:focus-visible .row-view { opacity: 1; }
+@media (max-width: 600px) {
+  .prog-treatments .row.is-clickable { grid-template-columns: 44px 1fr auto; }
+  .prog-treatments .row .row-view { display: none; }
+}
 
 /* DOCTORS -------------------------------------------------------- */
 .doctors { background: var(--ivory-soft); }

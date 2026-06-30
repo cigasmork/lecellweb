@@ -39,6 +39,7 @@ function Nav({ lang, setLang }) {
     { code: "KR", native: "한국어" },
     { code: "EN", native: "English" },
     { code: "JP", native: "日本語" },
+    { code: "CN", native: "简体中文" },
   ];
 
   const menuItems = [
