@@ -1,6 +1,6 @@
 const doctorsData = [
   {
-    role: "Chief Director · 대표원장",
+    role: "Director · 원장",
     nameKo: "정우송",
     nameEn: "Jung Woo-Song",
     photos: ["assets/dr-jung-1.jpg", "assets/dr-jung-2.jpg"],
@@ -70,7 +70,7 @@ const doctorsData = [
     cv: [
       { tag: "Edu.", line: "순천향대학교 의과대학 졸업" },
       { tag: "Cert.", line: "전문의" },
-      { tag: "Former", line: "우리들병원 응급의료센터 근무" },
+      { tag: "Former", line: "우리들병원 근무" },
       { tag: "Book", line: "저서 『Skin Deep, Gen Deep: Forever Young』 공저" },
       { tag: "Field", line: "피부 · 항노화 · 정밀진단 · 웰니스 진료" },
       { tag: "Current", line: "르셀청담 원장" },
@@ -78,7 +78,7 @@ const doctorsData = [
     cvEN: [
       { tag: "Edu.", line: "Soonchunhyang University College of Medicine" },
       { tag: "Cert.", line: "Board-Certified Physician" },
-      { tag: "Former", line: "Emergency Medical Center, Wooridul Hospital" },
+      { tag: "Former", line: "Wooridul Hospital" },
       { tag: "Book", line: "Co-author, 『Skin Deep, Gen Deep: Forever Young』" },
       { tag: "Field", line: "Dermatology · Anti-Aging · Precision Diagnostics · Wellness" },
       { tag: "Current", line: "Director, LeCell Cheongdam" },
@@ -86,14 +86,14 @@ const doctorsData = [
     cvJP: [
       { tag: "学歴", line: "順天郷大学医科大学卒" },
       { tag: "資格", line: "専門医" },
-      { tag: "前職", line: "ウリドゥル病院 救急医療センター勤務" },
+      { tag: "前職", line: "ウリドゥル病院 勤務" },
       { tag: "著書", line: "『Skin Deep, Gen Deep: Forever Young』 共著" },
       { tag: "専門", line: "皮膚 · 抗老化 · 精密診断 · ウェルネス診療" },
       { tag: "現職", line: "ルセル清潭 院長" },
     ],
   },
   {
-    role: "Advisory Director · 고문원장",
+    role: "Advisor · 고문 (의학박사)",
     nameKo: "이길연",
     nameEn: "Lee Gil-yeon",
     photos: [window.__resources?.drLee || "assets/dr-lee.png"],
