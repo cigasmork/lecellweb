@@ -83,6 +83,7 @@ const doctorsData = [
     role: "Director · 원장",
     nameKo: "정재윤",
     nameEn: "Jung Jae-Yoon",
+    hidePhoto: true,
     photos: [window.__resources?.drJungjae || "assets/dr-jungjae.png"],
     cv: [
       { tag: "Edu.", line: "순천향대학교 의과대학 졸업" },
@@ -259,7 +260,7 @@ function Doctors() {
               width: "100%",
               margin: "0 auto",
             }}>
-              {photos.map((src, i) => (
+              {!doc.hidePhoto && photos.map((src, i) => (
                 <img key={src} src={src} alt={doc.nameEn}
                   style={{
                     position: "absolute", inset: 0,
