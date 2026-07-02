@@ -45,6 +45,7 @@ function Nav({ lang, setLang }) {
   const menuItems = [
     { id: "about",     label: t.nav.about },
     { id: "signature", label: t.nav.signature },
+    { id: "surgery",   label: t.nav.surgery },
     { id: "programs",  label: t.nav.programs },
     { id: "doctors",   label: t.nav.doctors },
     { id: "space",     label: t.nav.space },

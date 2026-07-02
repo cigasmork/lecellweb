@@ -6,7 +6,7 @@ function Location() {
     <section className="location" id="location">
       <div className="wrap">
         <div className="section-num" style={{ marginBottom: 48 }}>
-          <span className="n" style={{ color: "var(--gold)" }}>— 06</span>
+          <span className="n" style={{ color: "var(--gold)" }}>— 07</span>
           <span className="label" style={{ color: "rgba(240,233,217,0.55)" }}>{l.sectionLabel}</span>
         </div>
         <div className="loc-grid">

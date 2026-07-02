@@ -61,6 +61,7 @@ function App() {
       </section>
 
       {tweaks.showSignature && <Signature />}
+      <Surgery />
       <Programs />
       <Doctors />
       <SpaceSection />

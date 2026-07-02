@@ -15,7 +15,7 @@ function SpaceSection() {
       <div className="wrap">
         <div className="space-head">
           <div className="section-num" style={{ justifyContent: "center" }}>
-            <span className="n">— 05</span>
+            <span className="n">— 06</span>
             <span className="label">{s.sectionLabel}</span>
           </div>
           <h2>{s.title} <em>{s.titleEm}</em></h2>

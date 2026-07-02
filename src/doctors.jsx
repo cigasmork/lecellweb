@@ -216,7 +216,7 @@ function Doctors() {
     <section className="doctors section-pad" id="doctors">
       <div className="wrap">
         <div className="section-num">
-          <span className="n">— 04</span>
+          <span className="n">— 05</span>
           <span className="label">{d.sectionLabel}</span>
         </div>
         <div className="doctors-head">
