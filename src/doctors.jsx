@@ -88,7 +88,7 @@ const doctorsData = [
     cv: [
       { tag: "Edu.", line: "순천향대학교 의과대학 졸업" },
       { tag: "Cert.", line: "전문의" },
-      { tag: "Former", line: "우리들병원 근무" },
+      { tag: "Former", line: "우리병원 근무" },
       { tag: "Book", line: "저서 『Skin Deep, Gen Deep: Forever Young』 공저" },
       { tag: "Field", line: "피부 · 항노화 · 정밀진단 · 웰니스 진료" },
       { tag: "Current", line: "르셀청담 원장" },
@@ -96,7 +96,7 @@ const doctorsData = [
     cvEN: [
       { tag: "Edu.", line: "Soonchunhyang University College of Medicine" },
       { tag: "Cert.", line: "Board-Certified Physician" },
-      { tag: "Former", line: "Wooridul Hospital" },
+      { tag: "Former", line: "Woori Hospital" },
       { tag: "Book", line: "Co-author, 『Skin Deep, Gen Deep: Forever Young』" },
       { tag: "Field", line: "Dermatology · Anti-Aging · Precision Diagnostics · Wellness" },
       { tag: "Current", line: "Director, LeCell Cheongdam" },
@@ -104,7 +104,7 @@ const doctorsData = [
     cvJP: [
       { tag: "学歴", line: "順天郷大学医科大学卒" },
       { tag: "資格", line: "専門医" },
-      { tag: "前職", line: "ウリドゥル病院 勤務" },
+      { tag: "前職", line: "ウリ病院 勤務" },
       { tag: "著書", line: "『Skin Deep, Gen Deep: Forever Young』 共著" },
       { tag: "専門", line: "皮膚 · 抗老化 · 精密診断 · ウェルネス診療" },
       { tag: "現職", line: "ルセル清潭 院長" },
@@ -112,7 +112,7 @@ const doctorsData = [
     cvCN: [
       { tag: "学历", line: "顺天乡大学医科大学毕业" },
       { tag: "资格", line: "专科医师" },
-      { tag: "前职", line: "曾任职于 Wooridul 医院" },
+      { tag: "前职", line: "曾任职于 Woori 医院" },
       { tag: "著作", line: "合著《Skin Deep, Gen Deep: Forever Young》" },
       { tag: "专长", line: "皮肤 · 抗衰老 · 精密诊断 · 健康管理诊疗" },
       { tag: "现职", line: "LeCell 清潭 院长" },
